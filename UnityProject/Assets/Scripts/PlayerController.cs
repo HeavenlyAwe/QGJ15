@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 
     // link to the current orbit
     public Orbit orbit;
+    public ParticleSystem smoke;
 
     public float angle;
     public float radius;
@@ -30,10 +31,12 @@ public class PlayerController : MonoBehaviour
         // Add impulse to the rotationSpeed
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            smoke.Play();
             rotationSpeed = rotationImpulse;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            smoke.Play();
             rotationSpeed = -rotationImpulse;
         }
 
