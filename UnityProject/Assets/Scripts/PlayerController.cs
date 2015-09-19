@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public int state;
 
-    public float rotationSpeed;
+    private float rotationSpeed;
 
     // link to the current orbit
     private List<Orbit> orbits = new List<Orbit>();
@@ -139,7 +139,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Make the player start on the latest added orbit
+    /// </summary>
+    /// <param name="orbit"></param>
     public void AddOrbit(Orbit orbit)
     {
         orbits.Add(orbit);

@@ -40,11 +40,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetPrefabs:
-  - {fileID: 174534, guid: 43e16bdb546d0e4449d1441d0ccb5f37, type: 2}
+  - {fileID: 171682, guid: 15aaf321346138b4db6f8763bac8eb7d, type: 2}
+  - {fileID: 189374, guid: 69765fcd1c6cb1e4fa0d820b288ee37d, type: 2}
+  - {fileID: 187262, guid: f2ead02ddf4a3a94cb8d33f3899aa7a7, type: 2}
+  - {fileID: 179494, guid: bbf970fed0434d94d9cbe0a60c866a18, type: 2}
+  - {fileID: 184592, guid: b573e0baba5310048ada0fb65e1080de, type: 2}
+  - {fileID: 157286, guid: 00b7d52730ad086478a8f1052164f063, type: 2}
+  - {fileID: 131084, guid: cd0a547e0fd62894b96209ba8f7c9958, type: 2}
+  - {fileID: 148610, guid: 687762aefce96ea4cb2536138d19dfb1, type: 2}
+  - {fileID: 141994, guid: ebf3e71c8ed087e4f9515f662cf851fa, type: 2}
+  - {fileID: 157324, guid: e3a6313aac2a2bd48b6797e88192726f, type: 2}
   trailPrefab: {fileID: 124090, guid: b400b98d90c036a4caf615c33c0d61cb, type: 2}
   planets: []
   radius: 1
-  maxPlanets: 4
   trailSpacing: .75
   trailPulsePeriod: 1
   trailPulseAmplitude: .100000001
