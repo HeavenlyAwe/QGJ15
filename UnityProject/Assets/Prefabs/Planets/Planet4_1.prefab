@@ -180,9 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0
-  height: 5
+  height: 0
   theta: 0
-  direction: 0
+  direction: 1
 --- !u!135 &13570372
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -7,8 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public ParticleSystem smoke;
 
-    public Material skyboxSpace;
-    public Material skyboxAtom;
+    public SolarSystem solarSystem;
 
     public float angle;
     public float radius;
@@ -17,15 +16,12 @@ public class PlayerController : MonoBehaviour
     public float damping = 0.95f;
     public float acceleration = 0.1f;
 
-    public int state;
-
     public AudioClip explosionSound;
     private AudioSource audioSource;
 
     private float rotationSpeed;
 
     // link to the current orbit
-    private List<Orbit> orbits = new List<Orbit>();
     private int currentOrbitIndex = -1;
     private float targetRadius;
 
@@ -44,7 +40,7 @@ public class PlayerController : MonoBehaviour
         // Always apply the damping
         rotationSpeed *= damping;
 
-        if (state == 0)
+        if (solarSystem.state == 0)
         {
             UpdateRotateInOrbital();
         }
@@ -53,7 +49,7 @@ public class PlayerController : MonoBehaviour
         // Movement between orbitals
         //==================================================================================
 
-        if (state == 1)
+        if (solarSystem.state == 1)
         {
             UpdateSwitchOrbital();
         }
@@ -63,9 +59,9 @@ public class PlayerController : MonoBehaviour
         //==================================================================================
         UpdateSwapBetweenStates();
 
-        if (orbits[currentOrbitIndex] != null)
+        if (solarSystem.orbits[currentOrbitIndex] != null)
         {
-            targetRadius = orbits[currentOrbitIndex].radius;
+            targetRadius = solarSystem.orbits[currentOrbitIndex].radius;
         }
         radius = Mathf.Lerp(radius, targetRadius, 10.0f * Time.deltaTime);
         angle += rotationSpeed;
@@ -105,9 +101,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             currentOrbitIndex += 1;
-            if (currentOrbitIndex >= orbits.Count)
+            if (currentOrbitIndex >= solarSystem.orbits.Count)
             {
-                currentOrbitIndex = orbits.Count - 1;
+                currentOrbitIndex = solarSystem.orbits.Count - 1;
             }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -127,24 +123,7 @@ public class PlayerController : MonoBehaviour
         {
             // TODO: The audio doesn't get played!
             audioSource.PlayOneShot(explosionSound, 1.0f);
-            if (state == 0)
-            {
-                RenderSettings.skybox = skyboxAtom;
-                float x = 8.0f;
-                DOTween.To(() => x,
-                           t => { x = t; RenderSettings.skybox.SetFloat("_Exposure", x); },
-                           1.0f, 1.0f).SetEase(Ease.OutQuad);
-                state = 1;
-            }
-            else
-            {
-                RenderSettings.skybox = skyboxSpace;
-                float x = 8.0f;
-                DOTween.To(() => x,
-                           t => { x = t; RenderSettings.skybox.SetFloat("_Exposure", x); },
-                           1.0f, 1.0f).SetEase(Ease.OutQuad);
-                state = 0;
-            }
+            solarSystem.SwitchState();
         }
     }
 
@@ -152,13 +131,12 @@ public class PlayerController : MonoBehaviour
     /// Make the player start on the latest added orbit
     /// </summary>
     /// <param name="orbit"></param>
-    public void AddOrbit(Orbit orbit)
+    public void SetOrbit(int index, int numberOfPlanetsInOrbit)
     {
-        orbits.Add(orbit);
-        currentOrbitIndex += 1;
+        currentOrbitIndex = index;
         
         startOrbitIndex = currentOrbitIndex;
-        startAngle = 2.0f * Mathf.PI / (orbit.planets.Count * 2);
+        startAngle = 2.0f * Mathf.PI / (numberOfPlanetsInOrbit * 2);
 
         ResetPlayer();
     }
@@ -183,7 +161,7 @@ public class PlayerController : MonoBehaviour
         currentOrbitIndex = startOrbitIndex;
         rotationSpeed = 0.0f;
         angle = startAngle;
-        radius = orbits[currentOrbitIndex].radius;
+        radius = solarSystem.orbits[currentOrbitIndex].radius;
         targetRadius = radius;
     }
 

@@ -8,9 +8,13 @@ public class Orbit : MonoBehaviour
     public GameObject trailPrefab;
 
     public List<Planet> planets;
-    
+
+    public GameObject electronPrefab;
+
+    public List<Planet> electrons;
+
     public float radius = 1.0f;
-    
+
     public float trailSpacing = 0.1f;
 
     public float trailPulsePeriod = 1.0f;
@@ -34,10 +38,25 @@ public class Orbit : MonoBehaviour
             var prefab = planetPrefabs[planetTypeIndex];
             var p = GameObject.Instantiate(prefab).GetComponent<Planet>();
             p.transform.SetParent(transform);
-            
+            p.transform.localPosition = Vector3.zero;
+
             p.gameObject.name = "Planet" + i;
             p.theta = 2.0f * Mathf.PI / n * i;
             planets.Add(p);
+        }
+    }
+
+    public void CreateAtoms(int n)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            var e = GameObject.Instantiate(electronPrefab).GetComponent<Planet>();
+            e.transform.SetParent(transform);
+            e.transform.localPosition = Vector3.zero;
+
+            e.gameObject.name = "Electron" + i;
+            e.theta = 2.0f * Mathf.PI / n * i;
+            electrons.Add(e);
         }
     }
 
@@ -72,14 +91,28 @@ public class Orbit : MonoBehaviour
 
     void Update()
     {
+        float dt = Time.deltaTime;
+
+        float positionX;
+        float positionZ;
+
         // Rotate planets
         foreach (Planet p in planets)
         {
-            float positionX = radius * Mathf.Cos(p.theta); // * Mathf.Sin(phi * Mathf.Deg2Rad);
-            float positionZ = radius * Mathf.Sin(p.theta); // * Mathf.Sin(phi * Mathf.Deg2Rad);
-            p.transform.localPosition = new Vector3(positionX, 0, positionZ);
+            positionX = radius * Mathf.Cos(p.theta); // * Mathf.Sin(phi * Mathf.Deg2Rad);
+            positionZ = radius * Mathf.Sin(p.theta); // * Mathf.Sin(phi * Mathf.Deg2Rad);
+            p.transform.localPosition = new Vector3(positionX, p.height, positionZ);
 
-            p.theta = p.theta + p.direction * p.rotationSpeed * Time.deltaTime;
+            p.theta = p.theta + p.direction * p.rotationSpeed * dt;
+        }
+       
+        foreach (Planet e in electrons)
+        {
+            positionX = radius * Mathf.Cos(e.theta); // * Mathf.Sin(phi * Mathf.Deg2Rad);
+            positionZ = radius * Mathf.Sin(e.theta); // * Mathf.Sin(phi * Mathf.Deg2Rad);
+            e.transform.localPosition = new Vector3(positionX, e.height, positionZ);
+
+            e.theta = e.theta + e.direction * e.rotationSpeed * dt;
         }
 
         // Trail effects: rotate/pulse

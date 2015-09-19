@@ -52,6 +52,8 @@ MonoBehaviour:
   - {fileID: 157324, guid: e3a6313aac2a2bd48b6797e88192726f, type: 2}
   trailPrefab: {fileID: 124090, guid: b400b98d90c036a4caf615c33c0d61cb, type: 2}
   planets: []
+  electronPrefab: {fileID: 128694, guid: 117dbbf11458d734ea5b7a15761b6179, type: 2}
+  electrons: []
   radius: 1
   trailSpacing: .75
   trailPulsePeriod: 1

@@ -6,12 +6,12 @@ public class Planet : MonoBehaviour {
     public float rotationSpeed = 0;
 
     // Defines the depth of the image (how far away the planets are)
-    public float height = 5;
+    public float height = 0;
 
     // azimuthal angle (moving around the trajectory)
     public float theta = 0f;
 
-    public int direction;
+    public int direction = 1;
 
     // Use this for initialization
     void Start()
