@@ -10,8 +10,7 @@ public class Orbit : MonoBehaviour
     public List<Planet> planets;
     
     public float radius = 1.0f;
-
-    public int maxPlanets = 4;
+    
     public float trailSpacing = 0.1f;
 
     public float trailPulsePeriod = 1.0f;
@@ -29,7 +28,7 @@ public class Orbit : MonoBehaviour
 
     public void CreatePlanets(int n)
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 1; i <= n; i++)
         {
             int planetTypeIndex = Random.Range(0, planetPrefabs.Count);
             var prefab = planetPrefabs[planetTypeIndex];
@@ -37,7 +36,7 @@ public class Orbit : MonoBehaviour
             p.transform.SetParent(transform);
             
             p.gameObject.name = "Planet" + i;
-            p.theta = 2.0f * Mathf.PI / n;
+            p.theta = 2.0f * Mathf.PI / n * i;
             planets.Add(p);
         }
     }

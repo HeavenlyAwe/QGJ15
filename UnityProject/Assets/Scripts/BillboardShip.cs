@@ -3,10 +3,11 @@ using System.Collections;
 
 public class BillboardShip : MonoBehaviour {
 
-    public Transform targetTransform;
+    // public Transform targetTransform;
 	
 	// Update is called once per frame
 	void Update () {
-        transform.LookAt(targetTransform.position, Vector3.up);
+        // transform.LookAt(targetTransform.position, Vector3.up);
+        transform.LookAt(Vector3.zero, Vector3.up);
     }
 }
