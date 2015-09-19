@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 455412}
   - 33: {fileID: 3321720}
-  - 64: {fileID: 6470976}
   - 23: {fileID: 2377112}
   m_Layer: 0
   m_Name: Panel2
@@ -81,7 +80,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 489444}
   - 33: {fileID: 3346444}
-  - 64: {fileID: 6473600}
   - 23: {fileID: 2305800}
   m_Layer: 0
   m_Name: Panel1
@@ -268,30 +266,6 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140370}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &6470976
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100642}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &6473600
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 161884}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
