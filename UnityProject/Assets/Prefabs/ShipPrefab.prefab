@@ -28,6 +28,7 @@ GameObject:
   - 4: {fileID: 437502}
   - 114: {fileID: 11425258}
   - 114: {fileID: 11449872}
+  - 54: {fileID: 5434224}
   m_Layer: 0
   m_Name: ShipPrefab
   m_TagString: Untagged
@@ -245,6 +246,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161884}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &5434224
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122438}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &6461738
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -292,7 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47b97b3a63d1bb49a6b0202e49bd06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 0}
 --- !u!114 &11449872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,13 +319,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f844a326dcd41746838c02148b7a76d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbit: {fileID: 0}
   smoke: {fileID: 19840396}
+  skyboxSpace: {fileID: 0}
+  skyboxAtom: {fileID: 0}
   angle: 0
   radius: 5
   rotationImpulse: .00999999978
   damping: .949999988
   acceleration: .100000001
+  state: 0
 --- !u!198 &19840396
 ParticleSystem:
   m_ObjectHideFlags: 1

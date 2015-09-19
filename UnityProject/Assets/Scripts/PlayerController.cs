@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     private int currentOrbitIndex = -1;
     private float targetRadius;
 
+    private float startAngle = 0.0f;
+    private int startOrbitIndex = -1;
+
     // Use this for initialization
     void Start()
     {
@@ -147,6 +150,34 @@ public class PlayerController : MonoBehaviour
     {
         orbits.Add(orbit);
         currentOrbitIndex += 1;
+        
+        startOrbitIndex = currentOrbitIndex;
+        startAngle = 2.0f * Mathf.PI / (orbit.planets.Count * 2);
+
+        ResetPlayer();
+    }
+
+    /// <summary>
+    /// The player handles the collision detection. Checks whether 
+    /// the collider it collides with belongs to some "Enemy".
+    /// 
+    /// The ShipPrefab object has a Rigidbody for this system to work,
+    /// however it is set to "kinematic" to skip all the physic stuff.
+    /// </summary>
+    /// <param name="other"></param>
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collided! (player)");
+        ResetPlayer();
+    }
+
+    public void ResetPlayer()
+    {
+        currentOrbitIndex = startOrbitIndex;
+        rotationSpeed = 0.0f;
+        angle = startAngle;
+        radius = orbits[currentOrbitIndex].radius;
+        targetRadius = radius;
     }
 
 }

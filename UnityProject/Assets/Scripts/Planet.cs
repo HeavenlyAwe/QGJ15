@@ -29,5 +29,6 @@ public class Planet : MonoBehaviour {
     {
         direction = -1;
     }
+    
 }
 
