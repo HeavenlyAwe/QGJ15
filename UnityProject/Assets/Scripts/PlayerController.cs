@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     private float startAngle = 0.0f;
     private int startOrbitIndex = -1;
 
+    private bool followPlanet = false;
+    private Planet planet;
+
     // Use this for initialization
     void Awake()
     {
@@ -72,17 +75,26 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateRotateInOrbital()
     {
+        if (followPlanet)
+        {
+            angle = planet.theta;
+        }
+
         float orbitDamping = 4 / radius;
         // Add impulse to the rotationSpeed
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             smoke.Play();
             rotationSpeed = rotationImpulse * orbitDamping;
+            followPlanet = false;
+            planet = null;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             smoke.Play();
             rotationSpeed = -rotationImpulse * orbitDamping;
+            followPlanet = false;
+            planet = null;
         }
 
         // Continue the movement by applying a small acceleration
@@ -100,6 +112,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            followPlanet = false;
+            planet = null;
             currentOrbitIndex += 1;
             if (currentOrbitIndex >= solarSystem.orbits.Count)
             {
@@ -108,6 +122,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            followPlanet = false;
+            planet = null;
             currentOrbitIndex -= 1;
             if (currentOrbitIndex < 0)
             {
@@ -121,8 +137,8 @@ public class PlayerController : MonoBehaviour
         // Functionality to swap between the Space and Atom worlds
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // TODO: The audio doesn't get played!
-            audioSource.PlayOneShot(explosionSound, 1.0f);
+            followPlanet = false;
+            planet = null;
             solarSystem.SwitchState();
         }
     }
@@ -134,7 +150,7 @@ public class PlayerController : MonoBehaviour
     public void SetOrbit(int index, int numberOfPlanetsInOrbit)
     {
         currentOrbitIndex = index;
-        
+
         startOrbitIndex = currentOrbitIndex;
         startAngle = 2.0f * Mathf.PI / (numberOfPlanetsInOrbit * 2);
 
@@ -152,9 +168,26 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collided! (player)");
-        audioSource.PlayOneShot(explosionSound, 1.0f);
-        ResetPlayer();
+        if (other.tag == "Planet")
+        {
+            Debug.Log("Just  aplanet");
+            followPlanet = true;
+            planet = other.GetComponentInParent<Planet>();
+        }
+        else
+        {
+            audioSource.PlayOneShot(explosionSound, 1.0f);
+            ResetPlayer();
+        }
     }
+
+    //void OnTriggerStay(Collider other)
+    //{
+    //    if (other.tag == "Planet")
+    //    {
+    //        angle = other.GetComponentInParent<Planet>().theta + 2 / radius;
+    //    }
+    //}
 
     public void ResetPlayer()
     {
