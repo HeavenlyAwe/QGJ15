@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
 
     public int state;
 
+    public AudioClip explosionSound;
+    private AudioSource audioSource;
+
     private float rotationSpeed;
 
     // link to the current orbit
@@ -30,8 +33,9 @@ public class PlayerController : MonoBehaviour
     private int startOrbitIndex = -1;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -121,6 +125,8 @@ public class PlayerController : MonoBehaviour
         // Functionality to swap between the Space and Atom worlds
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // TODO: The audio doesn't get played!
+            audioSource.PlayOneShot(explosionSound, 1.0f);
             if (state == 0)
             {
                 RenderSettings.skybox = skyboxAtom;
@@ -168,6 +174,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collided! (player)");
+        audioSource.PlayOneShot(explosionSound, 1.0f);
         ResetPlayer();
     }
 
