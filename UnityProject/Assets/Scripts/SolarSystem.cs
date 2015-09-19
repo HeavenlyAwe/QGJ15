@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class SolarSystem : MonoBehaviour
 {
-
     public float rotationSpeed = 10.0f;
 
     public GameObject orbitPrefab;
+	public Skybox skybox;
 
     public int numberOfOrbits = 5;
     public int numberOfPlanets = 1;
@@ -38,6 +39,13 @@ public class SolarSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			//RenderSettings.skybox.SetFloat("_Exposure", 8.0f);
+			float x = 8.0f;
+			DOTween.To(() => x,
+			           t => { x = t; RenderSettings.skybox.SetFloat("_Exposure", x); },
+			           1.0f, 1.0f).SetEase(Ease.OutQuad);
+		}
     }
+
 }
