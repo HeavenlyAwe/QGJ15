@@ -36,6 +36,7 @@ public class SolarSystem : MonoBehaviour
 
         foreach (Planet p in orbit.planets)
         {
+            orbit.trailRotateSpeed = rotationSpeed / Mathf.Pow(orbit.radius, 2);
             p.rotationSpeed = rotationSpeed / Mathf.Pow(orbit.radius, 2);
         }
     }

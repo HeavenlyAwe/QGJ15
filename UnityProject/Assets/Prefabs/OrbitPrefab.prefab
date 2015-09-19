@@ -45,7 +45,7 @@ MonoBehaviour:
   planets: []
   radius: 1
   maxPlanets: 4
-  trailSpacing: 2
+  trailSpacing: .75
   trailPulsePeriod: 1
   trailPulseAmplitude: .100000001
   trailPulsePow: 2

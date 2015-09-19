@@ -11,16 +11,6 @@ public class Orbit : MonoBehaviour
     
     public float radius = 1.0f;
 
-    /*private float _radius = 1.0f;
-    public float radius
-    {
-        get { return _radius; }
-        set
-        {
-            _radius = value;
-            CreateTrail();
-        }
-    }*/
     public int maxPlanets = 4;
     public float trailSpacing = 0.1f;
 
@@ -96,7 +86,7 @@ public class Orbit : MonoBehaviour
         // Trail effects: rotate/pulse
         if (trail != null)
         {
-            trail.transform.Rotate(0.0f, trailRotateSpeed, 0.0f);
+            trail.transform.Rotate(0.0f, -trailRotateSpeed, 0.0f);
 
             // Pulsate
             float t = (Time.time + trailPulseDisplacement) % trailPulsePeriod;
