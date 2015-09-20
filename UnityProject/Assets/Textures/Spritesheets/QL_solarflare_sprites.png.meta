@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ad2984981af35a14984f93c77b66e107
-timeCreated: 1442708026
+guid: 61f107bbc5dbabe408eeb7e87ba7805b
+timeCreated: 1442734951
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,11 +12,10 @@ TextureImporter:
     21300010: QL_solarflare_sprites_5
     21300012: QL_solarflare_sprites_6
     21300014: QL_solarflare_sprites_7
-    21300016: QL_solarflare_sprites_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -50,10 +49,10 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -128,6 +127,16 @@ TextureImporter:
         height: 1060
       alignment: 7
       pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: QL_solarflare_sprites_7
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 0
+        width: 165
+        height: 756
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

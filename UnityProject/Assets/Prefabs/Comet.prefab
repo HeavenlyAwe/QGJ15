@@ -26,6 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 486660}
   - 82: {fileID: 8268002}
+  - 114: {fileID: 11461162}
   m_Layer: 0
   m_Name: Comet
   m_TagString: Untagged
@@ -145,6 +146,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11461162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d56ac2793976042b7dcd90fd1c86f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0, z: 0}
+  targetY: 10
+  yVelocity: 1
 --- !u!212 &21270288
 SpriteRenderer:
   m_ObjectHideFlags: 1

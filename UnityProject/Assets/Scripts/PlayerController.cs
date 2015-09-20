@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float damping = 0.95f;
     public float acceleration = 0.1f;
 
+    public List<AudioClip> movementSounds;
     public AudioClip explosionSound;
     private AudioSource audioSource;
 
@@ -41,10 +42,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //==================================================================================
+        // Movement between Space and Atom state
+        //==================================================================================
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            followPlanet = false;
+            planet = null;
+            solarSystem.SwitchState();
+        }
+
+        if (solarSystem.state == SolarSystem.State.MainMenu) return;
+            
         // Always apply the damping
         rotationSpeed *= damping;
 
-        if (solarSystem.state == 0)
+        if (solarSystem.state == SolarSystem.State.Space)
         {
             UpdateRotateInOrbital();
         }
@@ -53,16 +66,16 @@ public class PlayerController : MonoBehaviour
         // Movement between orbitals
         //==================================================================================
 
-        if (solarSystem.state == 1)
+        if (solarSystem.state == SolarSystem.State.Atom)
         {
             UpdateSwitchOrbital();
         }
 
-        //==================================================================================
-        // Movement between Space and Atom state
-        //==================================================================================
-        UpdateSwapBetweenStates();
-
+        //if (solarSystem.orbits == null) return;
+        if (solarSystem.orbits.Count <= currentOrbitIndex || currentOrbitIndex < 0)
+        {
+            currentOrbitIndex = solarSystem.orbits.Count - 1;
+        }
         if (solarSystem.orbits[currentOrbitIndex] != null)
         {
             targetRadius = solarSystem.orbits[currentOrbitIndex].radius;
@@ -70,9 +83,13 @@ public class PlayerController : MonoBehaviour
         radius = Mathf.Lerp(radius, targetRadius, 10.0f * Time.deltaTime);
         angle += rotationSpeed;
 
-        transform.localPosition = new Vector3(radius * Mathf.Cos(angle), transform.localPosition.y, radius * Mathf.Sin(angle));
+        var target = new Vector3(
+            radius * Mathf.Cos(angle), 
+            0.0f, //transform.localPosition.y, 
+            radius * Mathf.Sin(angle));
+        transform.localPosition = Vector3.Lerp(solarSystem.shipMainMenuPosition, target, entryT);
     }
-
+    public float entryT = 0.0f;
 
     private void UpdateRotateInOrbital()
     {
@@ -86,6 +103,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             smoke.Play();
+            int i = Random.Range(0, movementSounds.Count);
+            audioSource.PlayOneShot(movementSounds[i], 1.0f);
             rotationSpeed = rotationImpulse * orbitDamping;
             followPlanet = false;
             planet = null;
@@ -93,6 +112,8 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             smoke.Play();
+            int i = Random.Range(0, movementSounds.Count);
+            audioSource.PlayOneShot(movementSounds[i], 1.0f);
             rotationSpeed = -rotationImpulse * orbitDamping;
             followPlanet = false;
             planet = null;
@@ -133,16 +154,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateSwapBetweenStates()
-    {
-        // Functionality to swap between the Space and Atom worlds
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            followPlanet = false;
-            planet = null;
-            solarSystem.SwitchState();
-        }
-    }
+
 
     /// <summary>
     /// Make the player start on the latest added orbit
@@ -153,9 +165,12 @@ public class PlayerController : MonoBehaviour
         currentOrbitIndex = index;
 
         startOrbitIndex = currentOrbitIndex;
-        startAngle = 2.0f * Mathf.PI / (numberOfPlanetsInOrbit * 2);
+        startAngle = -0.5f * Mathf.PI;// / (numberOfPlanetsInOrbit * 4);
 
-        ResetPlayer();
+        rotationSpeed = 0.0f;
+        angle = startAngle;
+        radius = solarSystem.orbits[currentOrbitIndex].radius;
+        targetRadius = radius;
     }
 
     /// <summary>
@@ -179,17 +194,8 @@ public class PlayerController : MonoBehaviour
             {
                 audioSource.PlayOneShot(explosionSound, 1.0f);
             }
-            ResetPlayer();
+            solarSystem.EndGame();
         }
-    }
-    
-    public void ResetPlayer()
-    {
-        currentOrbitIndex = startOrbitIndex;
-        rotationSpeed = 0.0f;
-        angle = startAngle;
-        radius = solarSystem.orbits[currentOrbitIndex].radius;
-        targetRadius = radius;
     }
 
 }
