@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public ParticleSystem smoke;
 
+    // Reference to the SolarSystem object for controlling the swapping
     public SolarSystem solarSystem;
 
     public float angle;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private Planet planet;
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
@@ -167,28 +168,21 @@ public class PlayerController : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collided! (player)");
         if (other.tag == "Planet")
         {
-            Debug.Log("Just  aplanet");
             followPlanet = true;
             planet = other.GetComponentInParent<Planet>();
         }
         else
         {
-            audioSource.PlayOneShot(explosionSound, 1.0f);
+            if (audioSource != null)
+            {
+                audioSource.PlayOneShot(explosionSound, 1.0f);
+            }
             ResetPlayer();
         }
     }
-
-    //void OnTriggerStay(Collider other)
-    //{
-    //    if (other.tag == "Planet")
-    //    {
-    //        angle = other.GetComponentInParent<Planet>().theta + 2 / radius;
-    //    }
-    //}
-
+    
     public void ResetPlayer()
     {
         currentOrbitIndex = startOrbitIndex;

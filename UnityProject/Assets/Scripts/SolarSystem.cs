@@ -24,6 +24,8 @@ public class SolarSystem : MonoBehaviour
     private GameObject sun;
     private GameObject atomCore;
 
+    private AudioSource audioSource;
+
     void Start()
     {
         sun = GameObject.Instantiate(sunPrefab);
@@ -56,6 +58,8 @@ public class SolarSystem : MonoBehaviour
         state = 1;
         SwapElements();
         state = 0;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public Orbit CreateOrbit(float radius, int planetCount)
@@ -86,6 +90,7 @@ public class SolarSystem : MonoBehaviour
     {
         if (state == 0)
         {
+            audioSource.Play();
             RenderSettings.skybox = skyboxAtom;
             float x = 8.0f;
             DOTween.To(() => x,
@@ -96,6 +101,7 @@ public class SolarSystem : MonoBehaviour
         }
         else
         {
+            audioSource.Play();
             RenderSettings.skybox = skyboxSpace;
             float x = 8.0f;
             DOTween.To(() => x,

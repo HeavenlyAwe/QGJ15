@@ -282,7 +282,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -365,14 +365,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoke: {fileID: 19840396}
-  skyboxSpace: {fileID: 0}
-  skyboxAtom: {fileID: 0}
+  solarSystem: {fileID: 0}
   angle: 0
   radius: 5
   rotationImpulse: .00999999978
   damping: .949999988
   acceleration: .100000001
-  state: 0
   explosionSound: {fileID: 8300000, guid: 64a5017866e4c7b4a9b6a975b2265e9f, type: 3}
 --- !u!198 &19840396
 ParticleSystem:
@@ -1469,7 +1467,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 122438}
