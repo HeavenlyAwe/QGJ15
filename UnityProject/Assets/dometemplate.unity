@@ -996,7 +996,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: c842981794042654b82a55b95e165288, type: 2}
     - target: {fileID: 194014, guid: ad8c859cdcb079740b08e28713ce1010, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3384892, guid: ad8c859cdcb079740b08e28713ce1010, type: 2}
       propertyPath: m_Mesh
@@ -1128,7 +1128,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 165168, guid: ad8c859cdcb079740b08e28713ce1010, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 147660, guid: ad8c859cdcb079740b08e28713ce1010, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad8c859cdcb079740b08e28713ce1010, type: 2}
